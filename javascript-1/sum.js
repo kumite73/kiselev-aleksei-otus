@@ -2,8 +2,8 @@ function sum(a) {
   var currentSum = a;
 
   function f(b) {
-    if (typeof b != 'undefined') {
-      currentSum += parseInt(b);
+    if (typeof b !== 'undefined') {
+      currentSum += parseInt(b, 10);
     };
     return f;
   }
