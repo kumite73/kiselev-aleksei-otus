@@ -88,9 +88,6 @@ var fn2 = () => new Promise(resolve => {
 })
 
 function promiseReduce(asyncFunctions, reduce, initialValue) {
-  // инициализируем переменную в которой будет хранится memo начальным значением
-  let r = initialValue;
-
   // Создаем polyfill
   var promise = new Promise(function (resolve, reject) {
     // Инициализируем начало цепочки
@@ -99,15 +96,15 @@ function promiseReduce(asyncFunctions, reduce, initialValue) {
     // Проходим по массиву функций и добавляем в цепочку
     for (let asyncFunction of asyncFunctions) {
       chain = chain
-        .then(() => asyncFunction()) // Ставим вызов асинхронной функции в очередь
+        .then(asyncFunction) // Ставим вызов асинхронной функции в очередь
         .then((result) => {
-          r = reduce(r, result)      // Вычисляем и сохраняем значение функции reduce после выполнения asyncFunction()
+          initialValue = reduce(initialValue, result)      // Вычисляем и сохраняем значение функции reduce после выполнения asyncFunction()
         });
     }
 
     // Последним в цепочке добавляем вывод и завершение
-    chain = chain
-      .then(() => { resolve(r) } );
+    chain
+      .then(() => { resolve(initialValue) } );
   })
 
   // Возвращаем polyfill
@@ -120,9 +117,11 @@ promiseReduce(
     console.log('reduce')
     return memo * value
   },
-  1
+  3
 )
   .then(console.log)
 ```
 
 #### Замечания преподавателя:
+
+Можно вместо (() => asyncFunction()) написать (asyncFunction)
