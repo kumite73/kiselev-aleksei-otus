@@ -125,3 +125,40 @@ promiseReduce(
 #### Замечания преподавателя:
 
 Можно вместо (() => asyncFunction()) написать (asyncFunction)
+
+## Javascript-3
+
+Создаем свой модуль `npm init`
+Добавляем модуль `request` для вычисления времени и парсинга ответов `npm install request`
+Запускаем сервер `node server.js`
+Запускаем скрипт для асинхронных запросов `node request.js 5 async` можно указать третий параметр - это  урл сервера без слеша на конце. По умолчанию http://127.0.0.1:3000
+
+```javascript
+[ 'Request time in ms 217 body: Hello World\n path: /0',
+  'Request time in ms 229 body: Hello World\n path: /1',
+  'Request time in ms 254 body: Hello World\n path: /2',
+  'Request time in ms 270 body: Hello World\n path: /3',
+  'Request time in ms 288 body: Hello World\n path: /4' ]
+```
+
+Если убрать вывод сервера в консоль, результаты интереснее.
+
+```javascript
+[ 'Request time in ms 166 body: Hello World\n path: /0',
+  'Request time in ms 164 body: Hello World\n path: /1',
+  'Request time in ms 164 body: Hello World\n path: /2',
+  'Request time in ms 164 body: Hello World\n path: /3',
+  'Request time in ms 164 body: Hello World\n path: /4' ]
+```
+
+Запуск скрипта с цепочкой запросов `node request.js 5 chain`
+
+```javascript
+[ 'Request time in ms 188 body: Hello World\n path: /0',
+  'Request time in ms 200 body: Hello World\n path: /1',
+  'Request time in ms 220 body: Hello World\n path: /2',
+  'Request time in ms 245 body: Hello World\n path: /3',
+  'Request time in ms 259 body: Hello World\n path: /4' ]
+```
+
+### Замечания преподавателя
