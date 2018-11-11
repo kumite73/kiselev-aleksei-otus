@@ -4,7 +4,7 @@
 const http = require('http')
 const host = '127.0.0.1'
 const port = 3000
-const results =[]
+const results = []
 const start = new Date() // для вычисления времени ответа
 
 const requestSrv = (url) => new Promise((resolve, reject) => {
@@ -47,6 +47,7 @@ function requestServer(count, type, url) {
     urls.reduce((prev, current) => {
       return prev.then(() => requestSrv(current))
     }, Promise.resolve())
+    // Я никак не понял, как достать результирующее значения  results = []
   }
 };
 
