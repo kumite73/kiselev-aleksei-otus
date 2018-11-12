@@ -47,6 +47,9 @@ function requestServer(count, type, url) {
     urls.reduce((prev, current) => {
       return prev.then(() => requestSrv(current))
     }, Promise.resolve())
+      .then(() => {
+        console.log(results)
+      })
     // Я никак не понял, как достать результирующее значения  results = []
   }
 };
