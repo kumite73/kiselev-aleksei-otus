@@ -50,7 +50,6 @@ function requestServer(count, type, url) {
       .then(() => {
         console.log(results)
       })
-    // Я никак не понял, как достать результирующее значения  results = []
   }
 };
 
