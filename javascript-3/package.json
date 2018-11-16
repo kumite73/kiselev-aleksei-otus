@@ -1,0 +1,16 @@
+{
+  "name": "kumite-javascript-3",
+  "version": "1.0.0",
+  "description": "Homework JS-3",
+  "main": "request.js",
+  "dependencies": {
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "kumite73",
+  "license": "ISC"
+}

@@ -125,3 +125,19 @@ promiseReduce(
 #### Замечания преподавателя:
 
 Можно вместо (() => asyncFunction()) написать (asyncFunction)
+
+Для асинхронной реализации
+
+```javascript
+async function promiseReduce(asyncFunctions, reduceFn, initialValue) {
+  return asyncFunctions.reduce(async (memo, asyncFn) => (
+    reduceFn(memo, await asyncFn())
+  ), initialValue)
+}
+```
+
+## Javascript-3
+
+Создаем свой модуль `npm init`
+Запускаем сервер `node server.js`
+Запускаем скрипт для асинхронных запросов `node request.js 5 async` можно указать третий параметр - это урл сервера без слеша на конце. По умолчанию http://127.0.0.1:3000
