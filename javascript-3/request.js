@@ -34,11 +34,11 @@ function requestServer(count, type, url) {
   const urls = []
 
   for (let i = 0; i < count; i++) {
-    urls.push(url + '/' + i)
+    urls.push(`${url}/${i}`)
   }
 
   if (type === 'async') {
-    Promise.all(urls.map((u) => requestSrv(u)))
+    Promise.all(urls.map(requestSrv))
       .then(res => {
         console.log(res)
         console.log(`Время выполнения: ${new Date() - start}`)
