@@ -141,5 +141,3 @@ async function promiseReduce(asyncFunctions, reduceFn, initialValue) {
 Создаем свой модуль `npm init`
 Запускаем сервер `node server.js`
 Запускаем скрипт для асинхронных запросов `node request.js 5 async` можно указать третий параметр - это урл сервера без слеша на конце. По умолчанию http://127.0.0.1:3000
-
-### Замечания преподавателя
