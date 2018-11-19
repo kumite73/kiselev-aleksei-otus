@@ -147,4 +147,4 @@ async function promiseReduce(asyncFunctions, reduceFn, initialValue) {
 Полезная утилита `const flatten = require('flatten')` позволяет объединять массивы
 Для работы с файловой системой через промисы, берем обертку `const fs = require('mz/fs')`
 Устанавливаем `npm install mz`
-Запуск скрипта `node tree путь к директории` если не указан, по умолчанию берется текущий
+Запуск скрипта `node listfiles путь к директории` если не указан, по умолчанию берется текущий
