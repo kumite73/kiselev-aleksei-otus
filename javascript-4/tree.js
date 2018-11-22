@@ -1,7 +1,7 @@
-function Tree() {
-  const fs = require('mz/fs')
-  const path = require('path')
+const fs = require('mz/fs')
+const path = require('path')
 
+function Tree() {
   const out = { files: [], dirs: [] }
 
   function isDirectory(f) {
