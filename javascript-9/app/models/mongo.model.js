@@ -1,5 +1,5 @@
 // RSS model
-var ObjectId = require('mongodb').ObjectId;
+const ObjectId = require('mongodb').ObjectId;
 
 exports.all = function (collection) {
   return collection.find().toArray();

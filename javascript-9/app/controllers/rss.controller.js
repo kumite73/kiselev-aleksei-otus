@@ -1,14 +1,19 @@
 // RSS controller
-mongoModel    = require('../models/mongo.model');
-rssModel      = require('../models/rss.model');
-docController = require('../controllers/document.controller');
-ret           = require('../views/return.view');
+const mongoModel    = require('../models/mongo.model');
+const rssModel      = require('../models/rss.model');
+const docController = require('../controllers/document.controller');
+const ret           = require('../views/return.view');
+const ObjectId = require('mongodb').ObjectId;
+
+const Parser = require('rss-parser');
 
 // Коллекции
 const rss = (req) => { return req.app.locals.db.collection('rss') }
+const doc = (req) => { return req.app.locals.db.collection('documents') }
 
 // Параметры
 const id = (req) => { return req.params.id }
+
 
 // Все ленты
 exports.index = function (req, res) {
@@ -27,11 +32,48 @@ exports.getById = function (req, res) {
 // Парсинг Rss
 exports.postRss = function (req, res) {
   const url = req.body.url;
+  const parser = new Parser();
+  let   itemParsing = [];
 
-  rssModel.create(url, rss(req))
+  parser.parseURL(url)
     .then(result => {
-      const { ops } = result;
-      res.status(200).json(ops[0])
+      // Разбиваем рсс на заголовок и данные
+      itemParsing = result.items;
+      delete result.items;
+
+      return rss(req).findOne({ link: result.link })
+        .then(response => {
+          if (response) {
+            return rss(req).updateOne({ "_id": ObjectId(response._id) }, { $set: result })
+              .then(() => { return response._id });
+          } else {
+            return rss(req).insertOne(result)
+              .then((response) => {
+                const { ops } = response;
+                return ops[0]._id;
+              });
+          }
+        })
     })
-    .catch(error => res.status(500).json(error))
+    .then(rss_id => {
+      const saveItems = itemParsing.map(item => {
+        Object.assign(item, { rss_id: rss_id });
+
+        return doc(req).findOne({ guid: item.guid, rss_id: rss_id })
+          .then(response => {
+            if (response) {
+              return doc(req).updateOne({ "_id": ObjectId(response._id) }, { $set: item });
+            } else {
+              return doc(req).insertOne(item);
+            }
+          });
+      });
+      return Promise.all(saveItems);
+    })
+    .then(result => { ret.successJson('Success', res) })
+    .catch(error => { ret.errorJson(error, res) })
 };
+
+// Результаты их insertOne
+// const { ops } = response;
+// return ops[0]._id
