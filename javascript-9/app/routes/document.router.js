@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const rssController = require('../controllers/rss.controller');
+const documentController = require('../controllers/document.controller');
 const logs = require('../libs/logs.lib');
 
 // middleware that is specific to this router
@@ -10,10 +10,8 @@ router.use(function timeLog(req, res, next) {
   next();
 });
 
-router.get('/', rssController.index);
+router.get('/', documentController.index);
 
-router.get('/:id', rssController.getById);
-
-router.post('/', rssController.postRss);
+router.get('/:id', documentController.getById);
 
 module.exports = router;

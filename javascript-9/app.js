@@ -3,12 +3,13 @@ const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 
+const mongo = require('./configs/db');
+const web = require('./configs/web');
+
 const app = express();
-const port = 3000;
 
-const urlMongo = 'mongodb://vm:27017'
 
-MongoClient.connect(urlMongo, { useNewUrlParser: true, poolSize: 10 })
+MongoClient.connect(mongo.url, mongo.options)
   .then(client => {
     const db = client.db('parserRss');
 
@@ -18,6 +19,7 @@ MongoClient.connect(urlMongo, { useNewUrlParser: true, poolSize: 10 })
     app.use(bodyParser.json());
 
     app.use('/rss', require('./app/routes/rss.router'));
+    app.use('/document', require('./app/routes/document.router'));
 
-    app.listen(port, () => console.info(`parserRss running on port ${port}`));
+    app.listen(web.port, () => console.info(`parserRss running on port ${web.port}`));
   }).catch(error => console.error(error));

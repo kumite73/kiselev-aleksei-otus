@@ -1,0 +1,7 @@
+{
+  "url":  "mongodb://vm:27017",
+  "options": {
+    "useNewUrlParser": true,
+    "poolSize": 10
+  }
+}
