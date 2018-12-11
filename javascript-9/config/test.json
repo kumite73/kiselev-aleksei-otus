@@ -1,7 +1,7 @@
 {
   "db": {
     "url":  "mongodb://vm:27017",
-    "name": "parserRssDev",
+    "name": "parserRssTest",
     "options": {
       "useNewUrlParser": true,
       "poolSize": 10
