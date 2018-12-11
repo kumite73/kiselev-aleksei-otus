@@ -70,7 +70,7 @@ exports.postRss = function (req, res) {
       });
       return Promise.all(saveItems);
     })
-    .then(result => { ret.successJson('Success', res) })
+    .then(result => { ret.successJson({"Success": true}, res) })
     .catch(error => { ret.errorJson(error, res) })
 };
 

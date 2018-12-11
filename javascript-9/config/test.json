@@ -1,0 +1,13 @@
+{
+  "db": {
+    "url":  "mongodb://vm:27017",
+    "name": "parserRssDev",
+    "options": {
+      "useNewUrlParser": true,
+      "poolSize": 10
+    }
+  },
+  "web": {
+    "port": 3000
+  }
+}

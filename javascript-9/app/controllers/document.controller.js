@@ -2,9 +2,9 @@
 const mongoModel  = require('../models/mongo.model');
 const docModel    = require('../models/documents.model');
 const ret = require('../views/return.view');
-
 // Коллекции
-const document = (req) => { return req.app.locals.db.collection('documents') }
+
+const document = (req) => { return req.app.locals.db.collection('documents'); }
 
 // Параметры
 const id = (req) => { return req.params.id }

@@ -1,3 +1,5 @@
 exports.queryLog = (req) => {
-  console.log(new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''), 'Path:', req.originalUrl);
+  if (process.env.NODE_ENV !== 'test') {
+    console.log(new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''), 'Path:', req.originalUrl);
+  }
 }
