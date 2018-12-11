@@ -10,14 +10,14 @@ chai.use(chaiHttp);
 
 // Коннект к серверу
 describe('Server connect', () => {
-  // Перед запуском ждем подключения к монго 1 сек
+  // Перед запуском ждем подключения к монго
   before((done) => {
     setTimeout(() => {
       done();
-    }, 2000);
+    }, 100);
   });
   // Тест для /GET
-  it('it should GET / a message', (done) => {
+  it('it should GET / a welcome message', (done) => {
     chai.request(server)
       .get('/')
       .end((err, res) => {
