@@ -1,6 +1,4 @@
 // RSS model
 const  ObjectId = require('mongodb').ObjectId;
 
-exports.create = function (url, rss) {
-  return rss.insertOne({ url: url })
-};
+exports.create = (url, rss) => rss.insertOne({ url: url });

@@ -8,25 +8,24 @@ const ObjectId = require('mongodb').ObjectId;
 const Parser = require('rss-parser');
 
 // Коллекции
-const rss = (req) => { return req.app.locals.db.collection('rss') }
-const doc = (req) => { return req.app.locals.db.collection('documents') }
+const rss = (req) => req.app.locals.db.collection('rss');
+const doc = (req) => req.app.locals.db.collection('documents');
 
 // Параметры
-const id = (req) => { return req.params.id }
-
+const id = (req) => req.params.id;
 
 // Все ленты
 exports.index = function (req, res) {
   mongoModel.all(rss(req))
-    .then(result => { ret.successJson(result, res) })
-    .catch(error => { ret.errorJson(error, res) })
+    .then(result => ret.successJson(result, res))
+    .catch(error => ret.errorJson(error, res))
 };
 
 // Лента по ИД
 exports.getById = function (req, res) {
   mongoModel.findById(id(req), rss(req))
-    .then(result => { ret.successJson(result, res) })
-    .catch(error => { ret.errorJson(error, res)})
+    .then(result => ret.successJson(result, res))
+    .catch(error => ret.errorJson(error, res))
 };
 
 // Парсинг Rss
@@ -48,7 +47,7 @@ exports.postRss = function (req, res) {
               .then(() => { return response._id });
           } else {
             return rss(req).insertOne(result)
-              .then((response) => {
+              .then(response => {
                 const { ops } = response;
                 return ops[0]._id;
               });
@@ -70,8 +69,8 @@ exports.postRss = function (req, res) {
       });
       return Promise.all(saveItems);
     })
-    .then(result => { ret.successJson({"Success": true}, res) })
-    .catch(error => { ret.errorJson(error, res) })
+    .then(() => ret.successJson({"Success": true}, res))
+    .catch(error => ret.errorJson(error, res))
 };
 
 // Результаты их insertOne

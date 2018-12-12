@@ -1,10 +1,6 @@
 // RSS model
 const ObjectId = require('mongodb').ObjectId;
 
-exports.all = function (collection) {
-  return collection.find().toArray();
-}
+exports.all = (collection) => collection.find().toArray();
 
-exports.findById = function (id, collection) {
-  return collection.findOne(ObjectId(id));
-};
+exports.findById = (id, collection) => collection.findOne(ObjectId(id))
